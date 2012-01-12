@@ -20,11 +20,12 @@
 </head>
 <body style="text-align: center; font-family: 'Nova Square', cursive; background-image:url(http://www.deviantart.com/download/122345313/Deadmau5_Wallpaper_by_kampollo.jpg); background-position: center;">
 <?php
-	if(@$_POST['sent'] != '1'){
+	if(@$_POST['sent'] != '1'){	//Upload data transmitted
 	if(!file_exists('Zend/loader.php')){
 		//die('<h3>Zend is not installed.</h3>');
 	}
 	
+	//Get directory Content
     $dir = "./video/";
     $file_array = Array();
     if(is_dir($dir))    {
@@ -41,11 +42,13 @@
         echo "The directory '" . $dir . "' does not exist.";
     }
 	
+	//Create <option> list
 	$filenames_dropdown = '';
 	foreach($file_array as $key=>$value) {
 		$filenames_dropdown .= "<option>$value</option>";
 	} 
 	
+	//output video upload form
 		echo '
 		<div>
 			<form method="POST" action="' . $_SERVER['REQUEST_URI'] . '">
@@ -124,7 +127,9 @@
 			</form>
 			<h3 style="font-family: ' . "'Verdana'" . '; font-size: 0.75em;">&copy; 2011 <a href="http://jwhy.de/">JWhy</a></h3>
 		';
-		} elseif(@$_POST['sent'] == '1'){
+		} elseif(@$_POST['sent'] == '1'){//upload video to yt with given form data
+		
+		//init zend uploader
 		require_once 'Zend/Loader.php';
 		Zend_Loader::loadClass('Zend_Gdata_YouTube');
 		$yt = new Zend_Gdata_YouTube();
@@ -187,6 +192,7 @@
 				$myVideoEntry->setWhere($where);
 		*/
 		
+		//Do the upload
 		$uploadUrl = 'http://uploads.gdata.youtube.com/feeds/api/users/default/uploads';
 		try {
 		  $newEntry = $yt->insertEntry($myVideoEntry, $uploadUrl, 'Zend_Gdata_YouTube_VideoEntry');
