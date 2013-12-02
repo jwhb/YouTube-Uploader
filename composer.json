@@ -1,0 +1,14 @@
+{
+    "name": "jwhy/youtube-uploader",
+    "description": "Upload videos to Youtube via PHP using a dedicated / virtual server",
+    "require": {
+        "google/api-client": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "JWhy",
+            "email": "jwhy@jwhy.de"
+        }
+    ],
+    "minimum-stability": "dev"
+}
